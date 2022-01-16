@@ -17,7 +17,7 @@ export default function Layout({ children }) {
       </AppBar>
       <Container className={classes.main}>{children}</Container>
       <footer className={classes.footer}>
-        All right reserved by Amazona. Thank you!
+        @ All right reserved by Amazona. Thank you!
       </footer>
     </div>
   );
