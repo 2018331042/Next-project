@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-const useSyles = makeStyles({
+const useStyles = makeStyles({
   navbar: {
     backgroundColor: '#753a88',
     '& a': {
@@ -10,6 +10,11 @@ const useSyles = makeStyles({
   },
   grow: {
     flexGrow: 1,
+  },
+  image: {
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 20,
   },
   login: {
     color: '#FFFFFF',
@@ -25,4 +30,4 @@ const useSyles = makeStyles({
   },
 });
 
-export default useSyles;
+export default useStyles;

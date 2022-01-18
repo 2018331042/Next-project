@@ -10,13 +10,14 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import useSyles from '../utils/Styles';
+import useStyles from '../utils/Styles';
 
 export default function Layout({ children }) {
-  const classes = useSyles();
+  const classes = useStyles();
   return (
     <div>
-      <Head>Learning Project</Head>
+      <Head>
+        <title>Learning Project</title></Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
           <NextLink href="/" passHref>
