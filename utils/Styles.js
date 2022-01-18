@@ -6,10 +6,14 @@ const useSyles = makeStyles({
       color: '#ffffff',
       marginLeft: 10,
     },
+    textDecoration: 'none',
   },
-  // grow: {
-  //   flexGrow: 1,
-  // },
+  grow: {
+    flexGrow: 1,
+  },
+  login: {
+    color: '#FFFFFF',
+  },
   title: {
     marginLeft: 10,
   },

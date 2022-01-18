@@ -25,7 +25,8 @@ export default function Layout({ children }) {
             </Link>
           </NextLink>
           <div className={classes.grow}></div>
-          <Button>Login</Button>
+          <Button>cart</Button>
+          <Button className={classes.login}>Login</Button>
         </Toolbar>
       </AppBar>
       <Container className={classes.main}>{children}</Container>
