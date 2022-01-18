@@ -1,6 +1,15 @@
 import React, { Children } from 'react';
 import Head from 'next/head';
-import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
+import NextLink from 'next/link';
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Link,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import useSyles from '../utils/Styles';
 
 export default function Layout({ children }) {
@@ -10,9 +19,13 @@ export default function Layout({ children }) {
       <Head>Learning Project</Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Amazona
-          </Typography>
+          <NextLink href="/" passHref>
+            <Link>
+              <Typography variant="h6">Amazona</Typography>
+            </Link>
+          </NextLink>
+          <div className={classes.grow}></div>
+          <Button>Login</Button>
         </Toolbar>
       </AppBar>
       <Container className={classes.main}>{children}</Container>

@@ -1,8 +1,15 @@
 import { makeStyles } from '@material-ui/core';
 const useSyles = makeStyles({
   navbar: {
-    backgroundColor: '#000',
+    backgroundColor: '#753a88',
+    '& a': {
+      color: '#ffffff',
+      marginLeft: 10,
+    },
   },
+  // grow: {
+  //   flexGrow: 1,
+  // },
   title: {
     marginLeft: 10,
   },
