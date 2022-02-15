@@ -16,8 +16,6 @@ export default function Layout({ children }) {
   const classes = useStyles();
   return (
     <div>
-      <Head>
-        <title>Learning Project</title></Head>
       <AppBar position="static" className={classes.navbar}>
         <Toolbar>
           <NextLink href="/" passHref>
