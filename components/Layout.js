@@ -13,10 +13,12 @@ import {
 } from '@material-ui/core';
 import useStyles from '../utils/Styles';
 import { Store } from '../utils/Store';
+import { useRouter } from 'next/router';
 
 export default function Layout({ children }) {
+  const router = useRouter();
   const { state } = useContext(Store);
-  const { cart } = state;
+  const { cart, userInfo } = state;
   const classes = useStyles();
   return (
     <div>
@@ -39,7 +41,16 @@ export default function Layout({ children }) {
               )}
             </Link>
           </NextLink>
-          <Button className={classes.login}>Login</Button>
+          {userInfo ? (
+            <Button>{userInfo.name}</Button>
+          ) : (
+            <Button
+              onClick={() => router.push('/Login')}
+              className={classes.login}
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Container className={classes.main}>{children}</Container>
