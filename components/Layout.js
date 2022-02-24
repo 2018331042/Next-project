@@ -1,4 +1,4 @@
-import React, { Children, useContext } from 'react';
+import React, { Children, useContext, useState } from 'react';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import {
@@ -8,18 +8,35 @@ import {
   Button,
   Container,
   Link,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from '@material-ui/core';
 import useStyles from '../utils/Styles';
 import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
 
 export default function Layout({ children }) {
   const router = useRouter();
-  const { state } = useContext(Store);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { state, dispatch } = useContext(Store);
   const { cart, userInfo } = state;
   const classes = useStyles();
+  const logincClickHandler = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const loginMenuCloseHandler = () => {
+    setAnchorEl(null);
+  };
+  const logoutClickHandler = () => {
+    setAnchorEl(null);
+    dispatch({ type: 'USER_LOGOUT' });
+    Cookies.remove('userInfo');
+    Cookies.remove('cartItems');
+    router.push('/');
+  };
   return (
     <div>
       <AppBar position="static" className={classes.navbar}>
@@ -42,7 +59,24 @@ export default function Layout({ children }) {
             </Link>
           </NextLink>
           {userInfo ? (
-            <Button>{userInfo.name}</Button>
+            <>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={logincClickHandler}
+              >
+                {userInfo.name}
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={loginMenuCloseHandler}
+              >
+                <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
+              </Menu>
+            </>
           ) : (
             <Button
               onClick={() => router.push('/Login')}

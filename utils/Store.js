@@ -1,19 +1,18 @@
 import Cookies from 'js-cookie';
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 
 export const Store = createContext();
 const initialState = {
   darkMode: false,
   cart: {
-    cartItems: Cookies.get('cartItems')
-      ? JSON.parse(Cookies.get('cartItems'))
-      : [],
+    cartItems: Cookies.get('cartItems') ?? [],
   },
   userInfo: Cookies.get('userInfo')
     ? JSON.parse(Cookies.get('userInfo'))
     : null,
 };
 function reducer(state, action) {
+  // console.log({ state, action });
   switch (action.type) {
     case 'DARK_MODE_ON':
       return { ...state, darkMode: true };
@@ -40,7 +39,9 @@ function reducer(state, action) {
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case 'USER_LOGIN':
-      return { ...state, userInfo: action.payload.data };
+      return { ...state, userInfo: action.payload };
+    case 'USER_LOGOUT':
+      return { ...state, userInfo: null, cart: { cartItems: [] } };
     default:
       return state;
   }
@@ -49,5 +50,9 @@ function reducer(state, action) {
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
+
+  useEffect(() => {
+    console.log({ state });
+  }, [state]);
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }
