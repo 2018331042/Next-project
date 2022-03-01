@@ -33,6 +33,7 @@ export default function Layout({ children }) {
   const logoutClickHandler = () => {
     setAnchorEl(null);
     dispatch({ type: 'USER_LOGOUT' });
+
     Cookies.remove('userInfo');
     Cookies.remove('cartItems');
     router.push('/');

@@ -47,6 +47,7 @@ function CartScreen() {
   const checkOutHandler = () => {
     router.push('/Shipping');
   };
+  console.log({ cartItems });
   return (
     <Layout>
       <Typography component="h1" variant="h6">

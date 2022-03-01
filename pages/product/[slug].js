@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import data from '../../utils/data';
 import Layout from '../../components/Layout';
 import useStyles from '../../utils/Styles';
+import Comment from '../../models/Comment';
 import {
   Card,
   CardContent,
@@ -14,6 +15,7 @@ import {
   Button,
   Modal,
   Box,
+  TextareaAutosize,
 } from '@material-ui/core';
 import db from '../../utils/db';
 import Product from '../../models/Product';
@@ -37,6 +39,10 @@ export default function Productscreen(props) {
   const { product } = props;
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
+  const [comment, setComment] = useState();
+  const [comments, setComments] = useState([]);
+  const { state } = useContext(Store);
+  const { userInfo } = state;
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const classes = useStyles();
@@ -55,6 +61,19 @@ export default function Productscreen(props) {
     }
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity: 1 } });
     router.push('/Cart');
+  };
+
+  const commentPostHandler = async () => {
+    try {
+      const { data } = await axios.post('/api/comments/comment', {
+        name: userInfo.name,
+        productId: product._id,
+        comment,
+      });
+      console.log({ data });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -151,6 +170,37 @@ export default function Productscreen(props) {
             </List>
           </Card>
         </Grid>
+        <Grid item xs={12}>
+          <p>{comments}</p>
+        </Grid>
+        {userInfo ? (
+          <>
+            <Grid item xs={12}>
+              <TextareaAutosize
+                maxRows={10}
+                minRows={5}
+                aria-label="maximum height"
+                placeholder="Write your review"
+                style={{ width: 300 }}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              ></TextareaAutosize>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={commentPostHandler}
+              >
+                Post
+              </Button>
+            </Grid>
+          </>
+        ) : (
+          <div>
+            <p>Please login first to post your review</p>
+          </div>
+        )}
       </Grid>
     </Layout>
   );
@@ -162,6 +212,8 @@ export async function getServerSideProps(context) {
   console.log(slug);
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
+  const comments = await Comment.find({ productId: product._id });
+  console.log(comments);
   db.disconnect();
 
   return {

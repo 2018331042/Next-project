@@ -1,13 +1,16 @@
 import { useRouter } from 'next/router';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Store } from '../utils/Store';
 
 export default function Shipping() {
   const { state } = useContext(Store);
   const { userInfo } = state;
   const router = useRouter();
-  if (!userInfo) {
-    router.push('/Login?redirect=Shipping');
-  }
+  useEffect(() => {
+    if (!userInfo) {
+      router.push('/Login?redirect=Shipping');
+    }
+  }, [userInfo]);
+
   return <div>Shipping</div>;
 }

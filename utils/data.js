@@ -15,7 +15,18 @@ const data = {
       numReviews: 10,
       countInStock: 20,
       description: 'A popular shirt',
+      // Reviews: [
+      //   {
+      //     name: 'Bashir',
+      //     review: 'This is a quality product',
+      //   },
+      //   {
+      //     name: 'Karim',
+      //     review: 'This is a quality product',
+      //   },
+      // ],
     },
+
     {
       name: 'Fit Shirt',
       slug: 'fit-shirt',
@@ -29,6 +40,16 @@ const data = {
       numReviews: 10,
       countInStock: 20,
       description: 'A popular shirt',
+      // Reviews: [
+      //   {
+      //     name: 'Bashir',
+      //     review: 'This is a quality product',
+      //   },
+      //   {
+      //     name: 'Karim',
+      //     review: 'This is a quality product',
+      //   },
+      // ],
     },
     {
       name: 'Slim Shirt',
@@ -41,6 +62,16 @@ const data = {
       numReviews: 10,
       countInStock: 20,
       description: 'A popular shirt',
+      // Reviews: [
+      //   {
+      //     name: 'Bashir',
+      //     review: 'This is a quality product',
+      //   },
+      //   {
+      //     name: 'Karim',
+      //     review: 'This is a quality product',
+      //   },
+      // ],
     },
     {
       name: 'Golf Pants',
@@ -53,6 +84,16 @@ const data = {
       numReviews: 10,
       countInStock: 20,
       description: 'Smart looking pants',
+      // Reviews: [
+      //   {
+      //     name: 'Bashir',
+      //     review: 'This is a quality product',
+      //   },
+      //   {
+      //     name: 'Karim',
+      //     review: 'This is a quality product',
+      //   },
+      // ],
     },
     {
       name: 'Fit Pants',
@@ -65,6 +106,16 @@ const data = {
       numReviews: 10,
       countInStock: 20,
       description: 'A popular pants',
+      // Reviews: [
+      //   {
+      //     name: 'Bashir',
+      //     review: 'This is a quality product',
+      //   },
+      //   {
+      //     name: 'Karim',
+      //     review: 'This is a quality product',
+      //   },
+      // ],
     },
     {
       name: 'Classic Pants',
@@ -77,6 +128,16 @@ const data = {
       numReviews: 10,
       countInStock: 20,
       description: 'A popular pants',
+      // Reviews: [
+      //   {
+      //     name: 'Bashir',
+      //     review: 'This is a quality product',
+      //   },
+      //   {
+      //     name: 'Karim',
+      //     review: 'This is a quality product',
+      //   },
+      // ],
     },
   ],
   users: [
