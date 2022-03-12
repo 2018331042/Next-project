@@ -38,6 +38,7 @@ export default function Layout({ children }) {
     Cookies.remove('cartItems');
     router.push('/');
   };
+  console.log({ userInfo });
   return (
     <div>
       <AppBar position="static" className={classes.navbar}>
@@ -60,24 +61,51 @@ export default function Layout({ children }) {
             </Link>
           </NextLink>
           {userInfo ? (
-            <>
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={logincClickHandler}
-              >
-                {userInfo.name}
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={loginMenuCloseHandler}
-              >
-                <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
-              </Menu>
-            </>
+            userInfo.isAdmin === true ? (
+              <>
+                <Button
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={logincClickHandler}
+                >
+                  {userInfo.name}
+                </Button>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={loginMenuCloseHandler}
+                >
+                  <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
+                </Menu>
+                <Button
+                  onClick={() => router.push('/admin/dashBoard')}
+                  className={classes.login}
+                >
+                  DashBoard
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={logincClickHandler}
+                >
+                  {userInfo.name}
+                </Button>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={loginMenuCloseHandler}
+                >
+                  <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
+                </Menu>
+              </>
+            )
           ) : (
             <Button
               onClick={() => router.push('/Login')}

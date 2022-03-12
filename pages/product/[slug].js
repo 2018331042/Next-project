@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import data from '../../utils/data';
@@ -21,6 +21,7 @@ import db from '../../utils/db';
 import Product from '../../models/Product';
 import { Store } from '../../utils/Store';
 import axios from 'axios';
+import useSWR from 'swr';
 
 const style = {
   position: 'absolute',
@@ -34,19 +35,25 @@ const style = {
   p: 4,
 };
 
+// const fetcher = async (url, params) => await axios.get(url, params);
+
 export default function Productscreen(props) {
   const { dispatch } = useContext(Store);
   const { product } = props;
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
+  const [comments, setComments] = React.useState(props.comments);
   const [comment, setComment] = useState();
-  const [comments, setComments] = useState([]);
   const { state } = useContext(Store);
   const { userInfo } = state;
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const classes = useStyles();
-
+  // const { data } = useSWR(
+  //   '/api/comments/getComments',
+  //   fetcher({ productId: product._id })
+  // );
+  console.log(data);
   if (open == true) console.log('OK');
   if (open == false) console.log('close');
 
@@ -70,7 +77,10 @@ export default function Productscreen(props) {
         productId: product._id,
         comment,
       });
+      console.log(comment);
+      setComments((comments) => [...comments, data.comment]);
       console.log({ data });
+      setComment('');
     } catch (err) {
       console.log(err);
     }
@@ -170,9 +180,18 @@ export default function Productscreen(props) {
             </List>
           </Card>
         </Grid>
-        <Grid item xs={12}>
-          <p>{comments}</p>
-        </Grid>
+        {comments.length > 0 ? (
+          comments.map((comment) => (
+            <>
+              <Grid item xs={12}>
+                <p>{comment.name}</p>
+                <p>{comment.comment}</p>
+              </Grid>
+            </>
+          ))
+        ) : (
+          <p>No reviews yet</p>
+        )}
         {userInfo ? (
           <>
             <Grid item xs={12}>
@@ -212,13 +231,14 @@ export async function getServerSideProps(context) {
   console.log(slug);
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
-  const comments = await Comment.find({ productId: product._id });
-  console.log(comments);
+  const comments = await Comment.find({ productId: product._id }).lean();
+  // console.log(comments);
   db.disconnect();
 
   return {
     props: {
       product: db.convertDocToObj(product),
+      comments: comments.map(db.convertDocToObj),
     },
   };
 }
