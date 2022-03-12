@@ -232,8 +232,6 @@ export async function getServerSideProps(context) {
   await db.connect();
   const product = await Product.findOne({ slug }).lean();
   const comments = await Comment.find({ productId: product._id }).lean();
-  // console.log(comments);
-  db.disconnect();
 
   return {
     props: {
