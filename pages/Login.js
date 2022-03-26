@@ -1,21 +1,19 @@
 import {
-  Button,
-  List,
+  Button, Link, List,
   ListItem,
   TextField,
-  Typography,
-  Link,
+  Typography
 } from '@material-ui/core';
 import axios from 'axios';
-import NextLink from 'next/link';
-import React, { useContext, useEffect, useState } from 'react';
-import Layout from '../components/Layout';
-import useStyles from '../utils/Styles';
-import { Store } from '../utils/Store';
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
-import { Controller, useForm } from 'react-hook-form';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
+import React, { useContext, useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import Layout from '../components/Layout';
+import { Store } from '../utils/Store';
+import useStyles from '../utils/Styles';
 export default function Login() {
   const router = useRouter();
   const { redirect } = router.query;

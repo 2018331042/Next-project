@@ -3,17 +3,17 @@ import {
   List,
   ListItem,
   TextField,
-  Typography,
+  Typography
 } from '@material-ui/core';
-import { Router, useRouter } from 'next/router';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import CheckoutWizard from '../components/checkOutWizard';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
 import useStyles from '../utils/Styles';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 export default function Shipping() {
   const { state, dispatch } = useContext(Store);
   const {

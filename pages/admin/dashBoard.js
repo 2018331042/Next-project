@@ -3,7 +3,7 @@ import {
   List,
   ListItem,
   TextField,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';

@@ -2,8 +2,7 @@ import {
   Button,
   Card,
   Grid,
-  Link,
-  ListItem,
+  Link, List, ListItem,
   MenuItem,
   Select,
   Table,
@@ -12,17 +11,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
-  List,
+  Typography
 } from '@material-ui/core';
+import axios from 'axios';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import Layout from '../components/Layout';
-import NextLink from 'next/link';
-import Image from 'next/image';
 import { Store } from '../utils/Store';
-import dynamic from 'next/dynamic';
-import axios from 'axios';
-import { useRouter } from 'next/router';
 
 function CartScreen() {
   const router = useRouter();
